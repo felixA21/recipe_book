@@ -60,6 +60,10 @@ export class RecipeEditComponent implements OnInit {
     );
   }
 
+  onDeleteIngredient(index: number) {
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
+  }
+
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
@@ -74,7 +78,7 @@ export class RecipeEditComponent implements OnInit {
       const recipe = this.recipeService.getRecipe(this.id);
       recipeName = recipe.name;
       recipeDescription = recipe.description;
-      recipeImagePath = recipe.imgPath;
+      recipeImagePath = recipe.imagePath;
       if (recipe['ingredient']) {
         for (let ingredient of recipe.ingredient) {
           recipeIngredients.push(
